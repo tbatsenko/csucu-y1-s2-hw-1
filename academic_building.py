@@ -1,13 +1,15 @@
 # File: academic_building.py
 from classroom import Classroom
+from building import Building
 
 
-class AcademicBuilding(object):
-    def __init__(self, address, classrooms):
+class AcademicBuilding(Building):
+    def __init__(self, address, classrooms, **kwargs):
         """
         *** Called automaitcly when new instance of class is created.
-        This method initializes a new AcademicBuilding instance which has:
-        address - (str) address of the building
+        This method initializes a new AcademicBuilding instance
+        which inherits from Building class and calls it's __init__ method
+        and has additional params:
         classrooms - (list(Classroom, Classroom, ...)) - list of classrooms
         in the building.
 
@@ -24,7 +26,7 @@ class AcademicBuilding(object):
         Classroom 007 has a capacity of 12 persons and has the following equipment: TV.
         Classroom 008 has a capacity of 25 persons and has the following equipment: PC, projector.
         """
-        self.address = address
+        Building.__init__(self, address)
         self.classrooms = classrooms
 
     def total_equipment(self):
@@ -68,3 +70,5 @@ class AcademicBuilding(object):
         """
         return self.address + '\n' + '\n'.join(['%s']*len(
             self.classrooms)) % tuple(self.classrooms)
+import doctest
+doctest.testmod()
